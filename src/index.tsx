@@ -16,6 +16,7 @@ import Triangle from './controls/triangle';
 import CSS from './controls/css';
 import Div from './controls/div';
 import Avatar from './controls/avatar';
+import Recaptcha, {getRecaptchaToken} from './controls/recaptcha';
 
 
 export {
@@ -33,6 +34,7 @@ export {
 } from './util';
 
 export {
-    AppBase, View, Text, CSS, Div, SVG, Avatar, Triangle
+    AppBase, View, Text, CSS, Div, SVG, Avatar, Triangle,
+    Recaptcha, getRecaptchaToken
 }
 
