@@ -43,6 +43,7 @@ const processServerlessOfflineError = (message: string): Record<string, any> | n
 
 export type APISettings = {
     apiToken?: string,
+    recordToken?: string,
     headers?: any,
     solutionId?: string,
     stage?: 'dev' | 'staging' | 'prod'
@@ -69,6 +70,10 @@ export const callAPIBase = (
 
     if (isNonEmptyString(settings?.apiToken)) {
         headers.apiToken = settings?.apiToken;
+    }
+
+    if (isNonEmptyString(settings?.recordToken)) {
+        headers.recordToken = settings?.recordToken;
     }
 
     const webL = getWebLocation(`${_window.location}`);

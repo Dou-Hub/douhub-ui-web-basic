@@ -18,6 +18,7 @@ import Div from './controls/div';
 import Avatar from './controls/avatar';
 import Recaptcha, {getRecaptchaToken} from './controls/recaptcha';
 
+export { ARTICLE_CSS } from './article-css';
 
 export {
     getLocalStorage,
