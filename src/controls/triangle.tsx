@@ -9,7 +9,7 @@ const Triangle = (props: {
 }) => {
     const { size, style, direction } = props;
     const foreColor = props.foreColor ? props.foreColor : 'rgb(249,250,251)';
-    const backgroundColor = props.backgroundColor ? props.backgroundColor : 'rgb(255,255,255)';
+    const backgroundColor = props.backgroundColor ? props.backgroundColor : 'transparent';
 
     return <div style={{
         width: 0,
