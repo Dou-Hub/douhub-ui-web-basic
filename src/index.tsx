@@ -7,7 +7,8 @@ import AppBase from './app';
 
 export { abortCallAPI, callAPIBase, APISettings } from './call-api';
 export { callAPI } from './context/auth-call-api';
-export { signIn, getAuth, signInCognito, getCurrentPoolUser, signOut, useCurrentContext } from './context/auth-cognito';
+export { signIn, getAuth, signInCognito, getCurrentPoolUser, signOut } from './context/auth-cognito';
+export { useCurrentContext } from './context/use-current-context';
 
 import View from './controls/view';
 import Text from './controls/text';
@@ -17,7 +18,7 @@ import CSS from './controls/css';
 import Div from './controls/div';
 import Nothing from './controls/nothing';
 import Avatar from './controls/avatar';
-import Recaptcha, {getRecaptchaToken} from './controls/recaptcha';
+import Recaptcha, { getRecaptchaToken } from './controls/recaptcha';
 
 export { ARTICLE_CSS } from './article-css';
 
