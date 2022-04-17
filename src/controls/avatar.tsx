@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { isInteger, isNumber, isArray } from 'lodash';
+import { isInteger, isNumber, isArray, cloneDeep } from 'lodash';
 import SVG from './svg';
-import { isNonEmptyString, COLORS, stringToColor, getRecordDisplay } from 'douhub-helper-util'
+import { isNonEmptyString, COLORS, stringToColor, getRecordDisplay, isObject } from 'douhub-helper-util'
 import { Menu, Transition } from '@headlessui/react'
 import { map } from 'lodash';
 import { _track } from '../index';
@@ -33,9 +33,7 @@ const Avatar = (props: Record<string, any>) => {
     }
 
     useEffect(() => {
-        if (isNonEmptyString(props.data?.id)) {
-            setData(props.data);
-        }
+        setData(isObject(props.data)?cloneDeep(props.data):{});
     }, [props.data])
 
     const size = isInteger(props.size) ? props.size : 38;
@@ -79,7 +77,7 @@ const Avatar = (props: Record<string, any>) => {
                 {renderName()}
                 {renderAvatar()}
             </Menu.Button>
-            {isNonEmptyString(props.data?.currentStatus) && <div className={`absolute right-0 top-0 rounded-full ${props.data?.currentStatus == 'on' ? 'bg-green-600' : 'bg-red-600'}`} style={{ width: 10, height: 10 }} />}
+            {isNonEmptyString(data?.currentStatus) && <div className={`absolute right-0 top-0 rounded-full ${data?.currentStatus == 'on' ? 'bg-green-600' : 'bg-red-600'}`} style={{ width: 10, height: 10 }} />}
             {isArray(menu) && menu.length > 0 && <Transition
                 as={Fragment}
                 enter="transition ease-out duration-100"
@@ -114,7 +112,7 @@ const Avatar = (props: Record<string, any>) => {
     return hide ? null : <>
 
         <div
-            className={`avatar ${data ? 'avatar-image-wrapper' : 'avatar-icon-wrapper'} ${isNonEmptyString(wrapperClassName) ? wrapperClassName : ''}`}
+            className={`avatar ${isNonEmptyString(wrapperClassName) ? wrapperClassName : ''}`}
             style={{ width: size, height: size, position: 'relative', ...wrapperStyle }}>
             {renderUser()}
             {isNumber(count) && count > 0 &&
