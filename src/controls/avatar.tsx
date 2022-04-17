@@ -14,17 +14,17 @@ const styles = {
 const Avatar = (props: Record<string, any>) => {
 
     const { countWrapperStyle, countStyle, hide, count,
-        menu, realtimeStatus, wrapperClassName,
+        menu, wrapperClassName,
         wrapperStyle, nameStyle, svgStyle,
         nameToColor, notUser, imgStyle } = props;
 
     const [data, setData] = useState<Record<string, any>>({});
-    const [status, setStatus] = useState<string>('on');
-
+  
     let backgroundColor = isNonEmptyString(props.backgroundColor) ? props.backgroundColor : COLORS.white;
     let borderColor = isNonEmptyString(props.borderColor) ? props.borderColor : COLORS.black;
     let color = isNonEmptyString(props.color) ? props.color : borderColor;
     const display = getRecordDisplay(data);
+    
 
     if (nameToColor) {
         backgroundColor = stringToColor(display);
@@ -35,7 +35,6 @@ const Avatar = (props: Record<string, any>) => {
     useEffect(() => {
         if (isNonEmptyString(props.data?.id)) {
             setData(props.data);
-            setStatus('on');
         }
     }, [props.data])
 
@@ -80,7 +79,7 @@ const Avatar = (props: Record<string, any>) => {
                 {renderName()}
                 {renderAvatar()}
             </Menu.Button>
-            {realtimeStatus && <div className={`absolute right-0 top-0 rounded-full ${status == 'on' ? 'bg-green-600' : 'bg-red-600'}`} style={{ width: 10, height: 10 }} />}
+            {isNonEmptyString(props.data?.currentStatus) && <div className={`absolute right-0 top-0 rounded-full ${props.data?.currentStatus == 'on' ? 'bg-green-600' : 'bg-red-600'}`} style={{ width: 10, height: 10 }} />}
             {isArray(menu) && menu.length > 0 && <Transition
                 as={Fragment}
                 enter="transition ease-out duration-100"
