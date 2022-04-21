@@ -50,19 +50,39 @@ export const getLocalStorage = (key: string, defaultValue?: any) => {
 
     let data = null;
     const storageData = _window.localStorage.getItem(key);
-    try {
-        data = JSON.parse(storageData ? storageData : '{}');
-        if (isObject(data) && isInteger(data.ttl) && Date.now() > data.ttl * 1000) //ttl in seconds
+    if (isNil(storageData)) return defaultValue;
+
+    if (isNonEmptyString(storageData))
+    {
+        try
         {
-            return !isNil(defaultValue) ? defaultValue : null;
+            data = JSON.parse(storageData);
+            if (isObject(data) && isInteger(data.ttl)) //ttl in seconds
+            {
+                if ( Date.now() > data.ttl * 1000)
+                {
+                    return !isNil(defaultValue) ? defaultValue : null;
+                }
+                else
+                {
+                    return data.data;
+                }
+            }
+        }
+        catch
+        {
+            data = storageData;
         }
     }
-    catch (error) {
+    else
+    {
         data = storageData;
     }
+   
 
     return !isNil(data) ? data : (!isNil(defaultValue) ? defaultValue : null);
 };
+
 
 
 export const setLocalStorage = (key: string, data: any, expireMinutes?: number) => {

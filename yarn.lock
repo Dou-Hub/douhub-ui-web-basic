@@ -2407,10 +2407,10 @@ douhub-helper-util@1.0.85:
     slugify "^1.6.4"
     uuid "^8.3.2"
 
-douhub-ui-store@1.0.52:
-  version "1.0.52"
-  resolved "https://registry.yarnpkg.com/douhub-ui-store/-/douhub-ui-store-1.0.52.tgz#d1669e937868a96ca79bfedc5fd697065ab54da1"
-  integrity sha512-f9EBgGVwfYOstS8FgI3hG5eOIhpelNR3vOPNVD/6uZRJIwoTJ4rydV+X3vVU5ObkUCQFw513bb4tie3rTYfGZQ==
+douhub-ui-store@1.0.53:
+  version "1.0.53"
+  resolved "https://registry.yarnpkg.com/douhub-ui-store/-/douhub-ui-store-1.0.53.tgz#ea93171fdc041848d2ad0cffc69c47a492647133"
+  integrity sha512-eaGRri11UnGlgPevmonPrETf/O53tcD4LpE+6EY0O2ZpYAowpZA8hVaNafBEb2rIPRCoV4zBszM8DZE7SLl9lw==
   dependencies:
     douhub-helper-util "1.0.85"
     lodash "^4.17.21"
