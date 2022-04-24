@@ -18,6 +18,8 @@ import CSS from './controls/css';
 import Div from './controls/div';
 import Nothing from './controls/nothing';
 import Avatar from './controls/avatar';
+import Card from './controls/card';
+import Tags from './controls/tags';
 import Recaptcha, { getRecaptchaToken } from './controls/recaptcha';
 
 export { ARTICLE_CSS } from './article-css';
@@ -38,6 +40,6 @@ export {
 
 export {
     AppBase, View, Text, CSS, Div, Nothing, SVG, Avatar, Triangle,
-    Recaptcha, getRecaptchaToken
+    Recaptcha, getRecaptchaToken, Tags, Card
 }
 
