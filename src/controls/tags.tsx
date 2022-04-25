@@ -4,12 +4,22 @@ import { shortenString, isNonEmptyString } from 'douhub-helper-util';
 import Tooltip from './antd/tooltip';
 import { useEnvStore } from 'douhub-ui-store';
 
-const Tags = (props: Record<string, any>) => {
+const Tags = (props: {
+    tags: string[],
+    selectedTags?:string[],
+    maxTagLength?:number,
+    tooltipColor?:string,
+    tagClassName?:string,
+    textClassName?:string,
+    wrapperClassName?:string,
+    onClick?:(tag:string)=>void,
+}) => {
    
-    const { tags, selectedTags } = props;
+    const { tags } = props;
+    const selectedTags = isArray(props.selectedTags)?props.selectedTags:[];
     const tooltipColor = isNonEmptyString(props.tooltipColor)?props.tooltipColor:'#aaaaaa';
-    const maxLength = isNumber(props.maxLength) ? props.maxLength : 12;
-    const className = `cursor-pointer float-left flex h-5 items-center mb-1 rounded-lg whitespace-nowrap bg-gray-50 mr-2 px-1 my-1 leading-none self-center px-2 py-1 shadow hover:shadow-md ${isNonEmptyString(props.className) ? props.className : ''}`;
+    const maxLength = isNumber(props.maxTagLength) ? props.maxTagLength : 12;
+    const className = `cursor-pointer float-left flex h-5 items-center mb-1 rounded-lg whitespace-nowrap bg-gray-50 mr-2 px-1 my-1 leading-none self-center px-2 py-1 shadow hover:shadow-md ${isNonEmptyString(props.tagClassName) ? props.tagClassName : ''}`;
     const wrapperClassName = `w-full block text-2xs ${isNonEmptyString(props.wrapperClassName) ? props.wrapperClassName : ''}`;
     const envStore = useEnvStore();
     const envData = JSON.parse(envStore.data);
@@ -33,12 +43,14 @@ const Tags = (props: Record<string, any>) => {
                 return selectedTag.toLowerCase() == tag.toLowerCase();
             });
 
+            const textClassName = `leading-none ${selected?'search-highlight':''} ${isNonEmptyString(props.textClassName) ? props.textClassName : ''}`;
+
             let shortTag = shortenString(tag, maxLength);
             if (shortTag == tag) {
                 return <div key={index} onClick={() => onClick(tag)}
                     style={{ width: 'max-content' }}
                     className={className}>
-                        <span className={`leading-none ${selected?'search-highlight':''}`}>{shortTag}</span>
+                        <span className={textClassName}>{shortTag}</span>
                     </div>
             }
             else {
@@ -46,7 +58,7 @@ const Tags = (props: Record<string, any>) => {
                     <div onClick={() => onClick(tag)}
                         style={{ width: 'max-content' }}
                         className={className}>
-                            <span className={`leading-none ${selected?'search-highlight':''}`}>{shortTag}</span>
+                            <span className={textClassName}>{shortTag}</span>
                         </div>
                 </Tooltip>
             }
