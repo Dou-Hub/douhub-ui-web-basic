@@ -2407,6 +2407,20 @@ douhub-helper-util@1.0.85:
     slugify "^1.6.4"
     uuid "^8.3.2"
 
+douhub-helper-util@1.0.86:
+  version "1.0.86"
+  resolved "https://registry.yarnpkg.com/douhub-helper-util/-/douhub-helper-util-1.0.86.tgz#f3e19aed5d7456d021b5db23d70941e6579b0221"
+  integrity sha512-FkqWS4mWfowR7a4V+OSbJXvIP2lW0D654BVyiU6N+w2Ou3HsxjBDISZxoBVZk1KAntrhFxxA6Y4SUBmJyzb/IA==
+  dependencies:
+    axios "^0.24.0"
+    csvtojson "^2.0.10"
+    is-url "^1.2.4"
+    js-base64 "^3.7.2"
+    libphonenumber-js "^1.9.42"
+    lodash "^4.17.21"
+    slugify "^1.6.4"
+    uuid "^8.3.2"
+
 douhub-ui-store@1.0.53:
   version "1.0.53"
   resolved "https://registry.yarnpkg.com/douhub-ui-store/-/douhub-ui-store-1.0.53.tgz#ea93171fdc041848d2ad0cffc69c47a492647133"
