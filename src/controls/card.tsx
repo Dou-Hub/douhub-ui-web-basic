@@ -34,7 +34,7 @@ export const Card = (props: Record<string, any>) => {
                     {isArray(item.tags) && item.tags.length > 0 && <div className="w-full">
                         <Tags tags={item.tags} wrapperClassName="mt-1" selectedTags={tags} tooltipColor={tooltipColor} />
                     </div>}
-                    <div className="w-full mt-2 text-sm text-gray-500 cursor-pointer" dangerouslySetInnerHTML={{ __html: content }} onClick={onClick} />
+                    <div className="w-full mt-2 text-sm text-gray-700 cursor-pointer" dangerouslySetInnerHTML={{ __html: content }} onClick={onClick} />
                 </div>
             </div>
         </div>
