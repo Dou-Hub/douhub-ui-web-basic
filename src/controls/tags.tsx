@@ -1,8 +1,8 @@
 import React from 'react';
-import { isArray, isFunction, isNumber, map, uniq, find } from 'lodash';
+import { isArray, isFunction, isNumber, map, uniq, find, isNil } from 'lodash';
 import { shortenString, isNonEmptyString, isObject } from 'douhub-helper-util';
-import Tooltip from './antd/tooltip';
 import { useEnvStore } from 'douhub-ui-store';
+import ITooltip from './tooltip';
 
 const Tags = (props: {
     tags: string[],
@@ -14,9 +14,11 @@ const Tags = (props: {
     textClassName?: string,
     wrapperClassName?: string,
     onClick?: (tag: string) => void,
+    disableShorten?:boolean,
+    Tooltip?: any
 }) => {
 
-    const { tags } = props;
+    const { tags, disableShorten } = props;
     const selectedTags = isArray(props.selectedTags) ? props.selectedTags : [];
     const tooltipColor = isNonEmptyString(props.tooltipColor) ? props.tooltipColor : '#aaaaaa';
     const maxLength = isNumber(props.maxTagLength) ? props.maxTagLength : 12;
@@ -25,7 +27,8 @@ const Tags = (props: {
     const wrapperClassName = `w-full block text-xs ${isNonEmptyString(props.wrapperClassName) ? props.wrapperClassName : ''}`;
     const envStore = useEnvStore();
     const envData = JSON.parse(envStore.data);
-
+    const Tooltip = isNil(props.Tooltip) ? ITooltip : props.Tooltip;
+   
     const onClick = (tag: string) => {
         if (isFunction(props.onClick)) {
             props.onClick(tag);
@@ -47,7 +50,7 @@ const Tags = (props: {
 
             const textClassName = `leading-none ${selected ? 'search-highlight' : ''} ${isNonEmptyString(props.textClassName) ? props.textClassName : ''}`;
 
-            let shortTag = shortenString(tag, maxLength);
+            let shortTag = !disableShorten ? shortenString(tag, maxLength) : tag;
             if (shortTag == tag) {
                 return <div key={index} onClick={() => onClick(tag)}
                     style={{ width: 'max-content', ...tagStyle }}
@@ -58,6 +61,7 @@ const Tags = (props: {
             else {
                 return <Tooltip key={index} color={tooltipColor} placement='top' title={tag}>
                     <div onClick={() => onClick(tag)}
+                        title=""
                         style={{ width: 'max-content', ...tagStyle }}
                         className={tagClassName}>
                         <span className={textClassName}>{shortTag}</span>

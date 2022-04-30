@@ -20,6 +20,8 @@ import Nothing from './controls/nothing';
 import Avatar from './controls/avatar';
 import Card from './controls/card';
 import Tags from './controls/tags';
+import BasicModal from './controls/basic-modal';
+import Tooltip from './controls/tooltip';
 import Recaptcha, { getRecaptchaToken } from './controls/recaptcha';
 
 export { ARTICLE_CSS } from './article-css';
@@ -40,6 +42,6 @@ export {
 
 export {
     AppBase, View, Text, CSS, Div, Nothing, SVG, Avatar, Triangle,
-    Recaptcha, getRecaptchaToken, Tags, Card
+    Recaptcha, getRecaptchaToken, Tags, Card, BasicModal, Tooltip
 }
 

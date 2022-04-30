@@ -1,6 +1,6 @@
 import React from "react";
 export const Nothing = () => {
-     return <div className="hidden"/>
+     return <></>
 };
 
 export default Nothing;
