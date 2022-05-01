@@ -1,14 +1,15 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { isFunction, isArray, map, isNil } from 'lodash';
-import { SVG, _window, Nothing } from '../index';
+import { SVG, _window, Div } from '../index';
 import { isNonEmptyString, isObject } from 'douhub-helper-util';
 import { useEnvStore } from 'douhub-ui-store';
 import { isNumber } from 'util';
 
+
 const BasicModal = (props: Record<string, any>) => {
     //const [open, setOpen] = useState(true)
-    const { show, title, content, Content, icon, titleClassName, className, style, id } = props;
+    const { show, title, content, Content, titleClassName, className, id } = props;
     const buttons = isArray(props.buttons) ? props.buttons : [];
     const [processing, setProcessing] = useState<string | null>(null);
     const [error, setError] = useState<string | null>(null);
@@ -16,27 +17,24 @@ const BasicModal = (props: Record<string, any>) => {
     const envStore = useEnvStore();
     const winHeight = envStore.height;
     const dialogId = `modal-${id}`;
-    const contentHeightAdjust = isNumber(props.contentHeightAdjust) ? props.contentHeightAdjust : -250;
     const contentClassName = isNonEmptyString(props.contentClassName) ? props.contentClassName : '';
     const contentStyle = isObject(props.contentStyle) ? props.contentStyle : {};
-    const ButtonWrapper = isNil(props.ButtonWrapper) ? Nothing : props.ButtonWrapper;
-
-    const updateMaxHeight = () => {
-        if (show) {
-            const dialog = _window.document.getElementById(dialogId);
-            if (dialog) {
-                dialog.style['max-height'] = `${winHeight + contentHeightAdjust}px`;
-            }
-            else {
-                console.log(`retry dialog ${winHeight - 250}px`);
-                setTimeout(updateMaxHeight, 300);
-            }
-        }
-    }
+    const modalStyle = isObject(props.modalStyle) ? props.modalStyle : {};
+    const ButtonWrapper = isNil(props.ButtonWrapper) ? Div : props.ButtonWrapper;
+    const showHeader = isNonEmptyString(title);
+    const showFooter = buttons.length > 0 || isNonEmptyString(processing) || isNonEmptyString(error);
+    const contentHeightAdjust = isNumber(props.contentHeightAdjust) ? props.contentHeightAdjust : (showHeader ? 40 : 0);
+    const modalHeightAdjust= isNumber(props.modalHeightAdjust) ? props.modalHeightAdjust : (showFooter ? 62 : 0);
+    const width = isNil(props.width) ? '100%' : props.width;
+    const height = isNil(props.height) ? '100%' : props.height;
+    const maxWidth = isNil(props.maxWidth) ? '100%' : props.maxWidth;
+    const maxHeight = isNil(props.maxHeight) ? '100%' : props.maxHeight;
+    const style = { width, height, maxWidth, maxHeight, padding: 34, margin:'auto', ...props.style };
+    const contentRef:any = useRef(null);
 
     useEffect(() => {
-        updateMaxHeight();
-    }, [winHeight, show]);
+       if (contentRef.current) contentRef.current.scrollTo({top: 0, behavior: 'smooth'});
+    }, [show, contentRef.current])
 
     useEffect(() => {
         setProcessing(props.processing);
@@ -63,8 +61,13 @@ const BasicModal = (props: Record<string, any>) => {
         </div>
     }
 
+    const renderError = () => {
+        if (!isNonEmptyString(error)) return null;
+        return <div className="flex py-2"><div className="text-red-600 text-right">{error}</div></div>
+    }
+
     const renderButtons = () => {
-        if (!isNil(processing)) return null;
+        if (isNonEmptyString(processing) || isNonEmptyString(error)) return null;
         const totalButtons = buttons.length;
         return map(buttons, (button: any, index: number) => {
             const text = isNonEmptyString(button.text) ? button.text : '...';
@@ -127,9 +130,9 @@ const BasicModal = (props: Record<string, any>) => {
         <Transition.Root show={show} as={Fragment}>
             <Dialog
                 as="div"
-                className="fixed z-50 inset-0 overflow-y-auto"
+                className="fixed z-50 inset-0 overflow-hidden"
                 onClose={() => overlayClosable && onClose(true)}>
-                <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+                <div className="flex justify-center p-4 md:p-8 lg:p-12" style={{ height: winHeight }}>
                     <Transition.Child
                         as={Fragment}
                         enter="ease-out duration-300"
@@ -156,34 +159,36 @@ const BasicModal = (props: Record<string, any>) => {
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
                         <div
-                            className={`inline-block relative align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6 ${className ? className : ''}`}
+                            className={`inline-block relative align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all ${className ? className : ''}`}
                             style={style}
                         >
-                            <div>
-                                {isNonEmptyString(icon) && <div className="mx-auto flex items-center justify-center">
+                            <div className="overflow-hidden text-left" style={{ height: `calc(100% - ${modalHeightAdjust}px)`, ...modalStyle }}>
+                                {/* {isNonEmptyString(icon) && <div className="mx-auto flex items-center justify-center">
                                     <SVG src={icon} size={20} />
-                                </div>}
-                                {(isNonEmptyString(title) || isNonEmptyString(content)) && <div className="text-center">
-                                    {isNonEmptyString(title) && <Dialog.Title as="h3" className={`text-lg mx-2 leading-6 font-medium text-gray-900 ${titleClassName ? titleClassName : ''}`}>
-                                        {title}
-                                    </Dialog.Title>}
-                                    {dialogId && <div id={dialogId} className={`my-6 mx-2 text-align ${contentClassName}`} style={{ overflow: 'hidden', overflowY: 'auto', ...contentStyle }}>
-                                        {content}
-                                        {Content && <Content {...props} />}
-                                    </div>}
+                                </div>} */}
+                                {showHeader && <Dialog.Title as="h3" style={{ height: 40 }}
+                                    className={`text-lg leading-6 mb-0 font-medium text-gray-900 ${titleClassName ? titleClassName : ''}`}>
+                                    {title}
+                                </Dialog.Title>}
+                                {dialogId && <div ref={contentRef}
+                                    className={`text-align overflow-hidden overflow-y-auto ${contentClassName}`}
+                                    style={{ height: `calc(100% - ${contentHeightAdjust}px)`, ...contentStyle }}>
+                                    {content}
+                                    {Content && <Content {...props} />}
                                 </div>}
                             </div>
-                            {isNonEmptyString(error) && <div className="text-red-600 text-right">{error}</div>}
-                            {buttons.length > 0 && <div className="flex mt-6">
+
+                            {showFooter && <div className="flex mt-6">
                                 <div className="flex-1"></div>
                                 {renderButtons()}
                                 {renderProcessing()}
+                                {renderError()}
                             </div>}
                             {!isNil(props.showCloseIcon) && <div
                                 className={`absolute top-0 cursor-pointer right-0 p-2 hover:shadow ${props.closeIconWrapperClassName ? props.closeIconWrapperClassName : ''}`}
                                 style={props.closeIconWrapperStyle ? props.closeIconWrapperStyle : {}}
                                 onClick={() => onClose()}>
-                                <SVG src="/icons/x.svg" style={{ width: 20, ...(props.closeIconStyle ? props.closeIconStyle : {}) }} color={props.closeIconColor ? props.closeIconColor : '#000000'} />
+                                <SVG src="/icons/x.svg" style={{ width: 18, ...(props.closeIconStyle ? props.closeIconStyle : {}) }} color={props.closeIconColor ? props.closeIconColor : '#000000'} />
                             </div>}
                         </div>
                     </Transition.Child>
