@@ -6,7 +6,7 @@ import Tags from './tags';
 
 export const CardLayoutImageLeft = (props: Record<string, any>) => {
 
-    const { media, item, display, content, tags, tooltipColor, className, style, Tooltip, onClick, onLoadImageError, onLoadImageSuccess } = props;
+    const { media, item, display, content, tags, tooltipColor, className, style, Tooltip, onClick, onLoadImageError, onLoadImageSuccess, srOnlyUrl } = props;
 
     return <div
         style={isObject(style) ? style : {}}
@@ -16,6 +16,7 @@ export const CardLayoutImageLeft = (props: Record<string, any>) => {
         </div>}
         <div className="w-full flex flex-col p-4">
             <div className="w-full overflow-hidden text-base mb-2 font-semibold text-gray-900 leading-5 cursor-pointer" dangerouslySetInnerHTML={{ __html: display }} onClick={onClick} />
+            {isNonEmptyString(srOnlyUrl) && <a className="sr-only" href={srOnlyUrl} dangerouslySetInnerHTML={{ __html: display }}></a>}
             {isArray(item.tags) && item.tags.length > 0 && <div className="w-full">
                 <Tags tags={item.tags} wrapperClassName="mt-1" selectedTags={tags} tooltipColor={tooltipColor} Tooltip={Tooltip} />
             </div>}
@@ -28,7 +29,7 @@ export const CardLayoutImageLeft = (props: Record<string, any>) => {
 
 export const CardLayoutDefault = (props: Record<string, any>) => {
 
-    const { media, item, display, content, tags, tooltipColor, className, style, Tooltip, onClick, onLoadImageError, onLoadImageSuccess } = props;
+    const { media, item, display, content, tags, tooltipColor, className, style, Tooltip, onClick, onLoadImageError, onLoadImageSuccess, srOnlyUrl } = props;
 
     return <div
         style={isObject(style) ? style : {}}
@@ -40,6 +41,7 @@ export const CardLayoutDefault = (props: Record<string, any>) => {
             <div className="flex-1">
                 <div className="w-full block mt-2 flex flex-col">
                     <div className="w-full overflow-hidden text-base mb-2 font-bold text-gray-900 leading-5 cursor-pointer" dangerouslySetInnerHTML={{ __html: display }} onClick={onClick} />
+                    {isNonEmptyString(srOnlyUrl) && <a className="sr-only" href={srOnlyUrl} dangerouslySetInnerHTML={{ __html: display }}></a>}
                     {isArray(item.tags) && item.tags.length > 0 && <div className="w-full">
                         <Tags tags={item.tags} wrapperClassName="mt-1" selectedTags={tags} tooltipColor={tooltipColor} Tooltip={Tooltip} />
                     </div>}
