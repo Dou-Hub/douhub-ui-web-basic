@@ -22,7 +22,7 @@ const Tags = (props: {
     const selectedTags = isArray(props.selectedTags) ? props.selectedTags : [];
     const tooltipColor = isNonEmptyString(props.tooltipColor) ? props.tooltipColor : '#aaaaaa';
     const maxLength = isNumber(props.maxTagLength) ? props.maxTagLength : 12;
-    const tagClassName = `cursor-pointer float-left flex text-sm text-gray-800 h-6 items-center rounded-lg whitespace-nowrap bg-gray-50 border-gray-100 mr-2 my-1 leading-none self-center px-2 py-2 shadow hover:shadow-lg ${isNonEmptyString(props.tagClassName) ? props.tagClassName : ''}`;
+    const tagClassName = `cursor-pointer float-left flex text-base text-gray-800 h-6 items-center rounded-lg whitespace-nowrap bg-gray-50 border-gray-100 mr-2 my-1 leading-none self-center px-2 py-2 shadow hover:shadow-lg ${isNonEmptyString(props.tagClassName) ? props.tagClassName : ''}`;
     const tagStyle = isObject(props.tagStyle) ? props.tagStyle : {};
     const wrapperClassName = `w-full block ${isNonEmptyString(props.wrapperClassName) ? props.wrapperClassName : ''}`;
     const envStore = useEnvStore();
@@ -50,7 +50,7 @@ const Tags = (props: {
 
             const textClassName = `leading-none ${selected ? 'search-highlight' : ''} ${isNonEmptyString(props.textClassName) ? props.textClassName : ''}`;
 
-            let shortTag = !disableShorten ? shortenString(tag, maxLength) : tag;
+            const shortTag = !disableShorten ? shortenString(tag, maxLength) : tag;
             if (shortTag == tag) {
                 return <div key={index} onClick={() => onClick(tag)}
                     style={{ width: 'max-content', ...tagStyle }}

@@ -33,19 +33,19 @@ export const CardLayoutDefault = (props: Record<string, any>) => {
 
     return <div
         style={isObject(style) ? style : {}}
-        className={`flex flex-col bg-white rounded-lg border border-gray-100 shadow hover:shadow-lg ${isNonEmptyString(className) ? className : ''}`}>
+        className={`flex flex-col bg-white rounded-lg shadow hover:shadow-lg ${isNonEmptyString(className) ? className : ''}`}>
         {isNonEmptyString(media) && <div className="flex-shrink-0 cursor-pointer rounded-tl-lg rounded-tr-lg overflow-hidden" onClick={onClick}>
             <img className="w-full" src={media} alt="" onLoad={onLoadImageSuccess} onError={onLoadImageError} />
         </div>}
         <div className="flex-1 p-4 flex flex-col justify-between" >
             <div className="flex-1">
                 <div className="w-full block mt-2 flex flex-col">
-                    <div className="w-full overflow-hidden text-base mb-2 font-bold text-gray-900 leading-5 cursor-pointer" dangerouslySetInnerHTML={{ __html: display }} onClick={onClick} />
+                    <div className="w-full overflow-hidden text-lg mb-2 font-bold text-gray-900 leading-5 cursor-pointer" dangerouslySetInnerHTML={{ __html: display }} onClick={onClick} />
                     {isNonEmptyString(srOnlyUrl) && <a className="sr-only" href={srOnlyUrl} dangerouslySetInnerHTML={{ __html: display }}></a>}
                     {isArray(item.tags) && item.tags.length > 0 && <div className="w-full">
                         <Tags tags={item.tags} wrapperClassName="mt-1" selectedTags={tags} tooltipColor={tooltipColor} Tooltip={Tooltip} />
                     </div>}
-                    <div className="w-full overflow-hidden mt-2 text-sm text-gray-700 cursor-pointer" dangerouslySetInnerHTML={{ __html: content }} onClick={onClick} />
+                    <div className="w-full overflow-hidden mt-2 text-base text-gray-700 cursor-pointer" dangerouslySetInnerHTML={{ __html: content }} onClick={onClick} />
                 </div>
             </div>
         </div>
