@@ -15,13 +15,13 @@ export const CardLayoutImageLeft = (props: Record<string, any>) => {
             <img className="w-full self-center" src={media} alt="" onLoad={onLoadImageSuccess} onError={onLoadImageError} />
         </div>}
         <div className="w-full flex flex-col p-4">
-            <div className="w-full overflow-hidden text-base mb-2 font-semibold text-gray-900 leading-5 cursor-pointer" dangerouslySetInnerHTML={{ __html: display }} onClick={onClick} />
+            <div className="w-full overflow-hidden text-lg mb-2 font-bold text-gray-900 leading-5 cursor-pointer" dangerouslySetInnerHTML={{ __html: display }} onClick={onClick} />
             {isNonEmptyString(srOnlyUrl) && <a className="sr-only" href={srOnlyUrl} dangerouslySetInnerHTML={{ __html: display }}></a>}
             {isArray(item.tags) && item.tags.length > 0 && <div className="w-full">
                 <Tags tags={item.tags} wrapperClassName="mt-1" selectedTags={tags} tooltipColor={tooltipColor} Tooltip={Tooltip} />
             </div>}
             
-            <div className="w-full overflow-hidden text-sm mt-2 text-gray-700 cursor-pointer" dangerouslySetInnerHTML={{ __html: content }} onClick={onClick} />
+            <div className="w-full overflow-hidden text-base mt-2 text-gray-700 cursor-pointer" dangerouslySetInnerHTML={{ __html: content }} onClick={onClick} />
         </div>
 
     </div>
