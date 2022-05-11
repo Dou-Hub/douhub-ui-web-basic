@@ -75,7 +75,7 @@ const BasicModal = (props: Record<string, any>) => {
             switch (button.type) {
                 case 'warning': {
                     if (!isFunction(button.onClick)) button.onClick = onSubmit;
-                    return <ButtonWrapper {...button}><button
+                    return <ButtonWrapper key={index} {...button}><button
                         key={text}
                         type="button"
                         disabled={disabled}
@@ -87,7 +87,7 @@ const BasicModal = (props: Record<string, any>) => {
                 }
                 case 'danger': {
                     if (!isFunction(button.onClick)) button.onClick = onSubmit;
-                    return <ButtonWrapper {...button}><button
+                    return <ButtonWrapper key={index} {...button}><button
                         key={text}
                         type="button"
                         disabled={disabled}
@@ -99,7 +99,7 @@ const BasicModal = (props: Record<string, any>) => {
                 }
                 case 'cancel': {
                     if (!isFunction(button.onClick)) button.onClick = onClose;
-                    return <ButtonWrapper {...button}><button
+                    return <ButtonWrapper key={index} {...button}><button
                         key={text}
                         type="button"
                         disabled={disabled}
@@ -112,7 +112,7 @@ const BasicModal = (props: Record<string, any>) => {
                 default:
                     {
                         if (!isFunction(button.onClick)) button.onClick = onSubmit;
-                        return <ButtonWrapper {...button}><button
+                        return <ButtonWrapper key={index} {...button}><button
                             key={text}
                             type="button"
                             disabled={disabled}

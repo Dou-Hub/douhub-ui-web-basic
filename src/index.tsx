@@ -17,6 +17,7 @@ import Triangle from './controls/triangle';
 import CSS from './controls/css';
 import Div from './controls/div';
 import Nothing from './controls/nothing';
+import Img from './controls/img';
 import Avatar from './controls/avatar';
 import Card from './controls/card';
 import Tags from './controls/tags';
@@ -41,7 +42,7 @@ export {
 } from './util';
 
 export {
-    AppBase, View, Text, CSS, Div, Nothing, SVG, Avatar, Triangle,
+    AppBase, View, Text, CSS, Div, Nothing, SVG, Avatar, Triangle, Img, 
     Recaptcha, getRecaptchaToken, Tags, Card, BasicModal, Tooltip
 }
 
