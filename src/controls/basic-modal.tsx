@@ -1,18 +1,53 @@
 import React, { Fragment, useEffect, useState, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
-import { isFunction, isArray, map, isNil } from 'lodash';
-import { SVG, _window, Div } from '../index';
+import { isFunction, isArray, map, isNil, isNumber } from 'lodash';
+import { SVG, Div } from '../index';
 import { isNonEmptyString, isObject } from 'douhub-helper-util';
 import { useEnvStore } from 'douhub-ui-store';
-import { isNumber } from 'util';
 
 
-const BasicModal = (props: Record<string, any>) => {
+const BasicModal = (props: {
+    show?: boolean,
+    title?: boolean,
+    content?: any,
+    Content?: any,
+    ButtonWrapper?: any,
+    contentHeightAdjust?: number,
+    modalHeightAdjust?: number,
+    titleClassName?: string,
+    width?: string | number,
+    height?: string | number,
+    maxWidth?: string | number,
+    maxHeight?: string | number,
+    className?: string,
+    contentClassName?: string,
+    id?: string,
+    error?: string | null | undefined,
+    overlayClosable?: boolean,
+    style?: Record<string, any>,
+    processing?: string | null | undefined,
+    contentStyle?: Record<string, any>,
+    modalStyle?: Record<string, any>,
+    onClose?: any,
+    onSubmit?: any,
+    showCloseIcon?: boolean,
+    closeIconWrapperStyle?: Record<string, any>,
+    closeIconStyle?: Record<string, any>,
+    closeIconColor?: string,
+    closeIconWrapperClassName?: string,
+    buttons?: {
+        type?: 'warning' | 'cancel' | 'danger',
+        onClick: () => any,
+        text: string,
+        disabled?:boolean
+    }[],
+
+}) => {
     //const [open, setOpen] = useState(true)
     const { show, title, content, Content, titleClassName, className, id } = props;
     const buttons = isArray(props.buttons) ? props.buttons : [];
-    const [processing, setProcessing] = useState<string | null>(null);
-    const [error, setError] = useState<string | null>(null);
+    const [processing, setProcessing] = useState<string | null | undefined>(null);
+    const [error, setError] = useState<string | null | undefined>(null);
     const overlayClosable: any = props.overlayClosable == true ? true : false;
     const envStore = useEnvStore();
     const winHeight = envStore.height;
@@ -24,16 +59,16 @@ const BasicModal = (props: Record<string, any>) => {
     const showHeader = isNonEmptyString(title);
     const showFooter = buttons.length > 0 || isNonEmptyString(processing) || isNonEmptyString(error);
     const contentHeightAdjust = isNumber(props.contentHeightAdjust) ? props.contentHeightAdjust : (showHeader ? 40 : 0);
-    const modalHeightAdjust= isNumber(props.modalHeightAdjust) ? props.modalHeightAdjust : (showFooter ? 62 : 0);
+    const modalHeightAdjust = isNumber(props.modalHeightAdjust) ? props.modalHeightAdjust : (showFooter ? 58 : 0);
     const width = isNil(props.width) ? '100%' : props.width;
     const height = isNil(props.height) ? '100%' : props.height;
     const maxWidth = isNil(props.maxWidth) ? '100%' : props.maxWidth;
     const maxHeight = isNil(props.maxHeight) ? '100%' : props.maxHeight;
-    const style = { width, height, maxWidth, maxHeight, padding: 34, margin:'auto', ...props.style };
-    const contentRef:any = useRef(null);
+    const style = { width, height, maxWidth, maxHeight, padding: 34, margin: 'auto', ...props.style };
+    const contentRef: any = useRef(null);
 
     useEffect(() => {
-       if (contentRef.current) contentRef.current.scrollTo({top: 0, behavior: 'smooth'});
+        if (contentRef.current) contentRef.current.scrollTo({ top: 0, behavior: 'smooth' });
     }, [show, contentRef.current])
 
     useEffect(() => {
@@ -184,7 +219,7 @@ const BasicModal = (props: Record<string, any>) => {
                                 {renderProcessing()}
                                 {renderError()}
                             </div>}
-                            {!isNil(props.showCloseIcon) && <div
+                            {props.showCloseIcon && <div
                                 className={`absolute top-0 cursor-pointer right-0 p-2 hover:shadow ${props.closeIconWrapperClassName ? props.closeIconWrapperClassName : ''}`}
                                 style={props.closeIconWrapperStyle ? props.closeIconWrapperStyle : {}}
                                 onClick={() => onClose()}>
