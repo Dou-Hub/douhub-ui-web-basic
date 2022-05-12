@@ -22,8 +22,8 @@ const SVG = (props: Record<string, any>) => {
     const { style } = props;
     const src = isNonEmptyString(props.src) ? props.src : '';
     const color = isNonEmptyString(props.color) ? props.color : '#000000';
-    const id = `svg_${isNonEmptyString(props.id) ? props.id : src}`.replace(/[^A-Za-z0-9]+/g, '');
-    const cssId = `svg-css-${id}-${color}`.replace(/[^A-Za-z0-9]+/g, '');
+    const svgId = `svg_${isNonEmptyString(props.id) ? props.id : src}`.replace(/[^A-Za-z0-9]+/g, '');
+    const id = isNonEmptyString(color) ? `svg-${svgId}-${color}`.replace(/[^A-Za-z0-9]+/g, '') : svgId;
 
     // const [color, setColor] = useState(isNonEmptyString(props.color) ? props.color : '#000000');
     // const [id, setId] = useState(`svg_${isNonEmptyString(props.id) ? props.id : src}`.replace(/[^A-Za-z0-9]+/g, ''));
@@ -42,7 +42,7 @@ const SVG = (props: Record<string, any>) => {
 
     return <>
         <CSS id="svg-css" content={SVG_CSS} />
-        {isNonEmptyString(color) && <CSS id={cssId} content={`
+        {isNonEmptyString(color) && <CSS id={`${id}-css`} content={`
             #${id} .svg svg
             {
                 fill: ${color};
