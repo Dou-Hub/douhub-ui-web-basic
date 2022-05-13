@@ -3,12 +3,9 @@ import nookies from 'nookies';
 import { isObject, isNonEmptyString, ttl } from 'douhub-helper-util';
 import { isNil, isInteger, isNumber, isArray } from 'lodash';
 
-import getConfig from "next/config";
-const { publicRuntimeConfig } = getConfig();
-
 export const _window: any = typeof window !== "undefined" ? window : {};
-export const _process: any = typeof process !== "undefined" ? process : {};;
-export const _track = `${publicRuntimeConfig.track}`.toLowerCase() == 'true' || `${_process?.env?.TRACK}`.toLowerCase() == 'true';
+export const _process: any = typeof process !== "undefined" ? process : {};
+export const _track = _window?.track==true || _process?.track==true;
 
 // export const getPlatformApiEndpoint = (appSettings: Record<string, any>, apiName: string, functionName: string, country?: string): string => {
 //     return `${appSettings.platformEndpoint
