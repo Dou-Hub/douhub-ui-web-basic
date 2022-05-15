@@ -39,7 +39,7 @@ const BasicModal = (props: {
         type?: 'warning' | 'cancel' | 'danger',
         onClick: () => any,
         text: string,
-        disabled?:boolean
+        disabled?: boolean
     }[],
 
 }) => {
@@ -50,7 +50,7 @@ const BasicModal = (props: {
     const [error, setError] = useState<string | null | undefined>(null);
     const overlayClosable: any = props.overlayClosable == true ? true : false;
     const envStore = useEnvStore();
-    const winHeight = envStore.height;
+    const [winHeight, setWinHeight] = useState(300);
     const dialogId = `modal-${id}`;
     const contentClassName = isNonEmptyString(props.contentClassName) ? props.contentClassName : '';
     const contentStyle = isObject(props.contentStyle) ? props.contentStyle : {};
@@ -64,8 +64,12 @@ const BasicModal = (props: {
     const height = isNil(props.height) ? '100%' : props.height;
     const maxWidth = isNil(props.maxWidth) ? '100%' : props.maxWidth;
     const maxHeight = isNil(props.maxHeight) ? '100%' : props.maxHeight;
-    const style = { width, height, maxWidth, maxHeight, padding: 34, margin: 'auto', ...props.style };
+    const style = { width, height, maxWidth, maxHeight, padding: 34, paddingTop: showHeader ? 17 : 34, margin: 'auto', ...props.style };
     const contentRef: any = useRef(null);
+
+    useEffect(() => {
+        setWinHeight(envStore.height);
+    }, [envStore.height])
 
     useEffect(() => {
         if (contentRef.current) contentRef.current.scrollTo({ top: 0, behavior: 'smooth' });

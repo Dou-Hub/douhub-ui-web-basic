@@ -1,9 +1,10 @@
-export const ARTICLE_CSS =  `
+export const ARTICLE_CSS = `
     .article
     {
+        margin-top: 0;
+        margin-bottom: 0;
         display: flex;
         flex-direction: column;
-        // margin-top: 1rem;
     }
 
     .article img
@@ -45,7 +46,7 @@ export const ARTICLE_CSS =  `
         line-height: 1.2;
         font-weight: 700;
     }
-    
+
     .article h2
     {
         margin-top: 0.5rem;
@@ -111,5 +112,4 @@ export const ARTICLE_CSS =  `
     { 
         margin-bottom: 0;
     }
-
 `;
