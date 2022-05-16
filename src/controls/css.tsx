@@ -1,22 +1,23 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect } from 'react';
 import { isNonEmptyString } from 'douhub-helper-util';
-import { _window } from '../index';
+import { _window } from '../util';
+import { useCssStore } from 'douhub-ui-store';
 
-const CSS = (props: Record<string,any>) => {
+const CSS = (props: Record<string, any>) => {
 
     const { id, content } = props;
-    const [display, setDisplay] = useState(false);
-    useEffect(() => {
-        if (isNonEmptyString(id) && !_window.document.getElementById(id)) {
-            setDisplay(true);
-        }
-    },[])
+    const cssStore = useCssStore();
 
-    return display && isNonEmptyString(content)?
-        <style id={id}>{content}</style> :
-        <></>
+    useEffect(() => {
+        if (!_window.css) _window.css = {};
+        if (isNonEmptyString(id) && !_window.css[id]) {
+            _window.css[id] = true;
+            console.log({cssStore: {id, content}})
+            cssStore.setCSS(id, content);
+        }   
+    }, []);
+
+    return <></>
 }
 
-
-CSS.displayName = 'CSS';
 export default CSS;

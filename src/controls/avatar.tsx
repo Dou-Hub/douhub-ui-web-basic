@@ -94,7 +94,7 @@ const Avatar = (props: Record<string, any>) => {
                                 {({ active }) => (
                                     <div
                                         onClick={item.onClick}
-                                        className={`${active ? 'bg-gray-100' : ''} cursor-pointer block px-4 py-2 text-sm text-gray-700`}
+                                        className={`${active ? 'bg-gray-100' : ''} cursor-pointer block px-4 py-2 text-base text-gray-700`}
                                     >
                                         {item.title}
                                     </div>

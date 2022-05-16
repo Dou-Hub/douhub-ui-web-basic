@@ -2420,10 +2420,10 @@ domexception@^2.0.1:
   dependencies:
     webidl-conversions "^5.0.0"
 
-douhub-helper-util@1.0.85:
-  version "1.0.85"
-  resolved "https://registry.yarnpkg.com/douhub-helper-util/-/douhub-helper-util-1.0.85.tgz#1074cb769e760b916a0b27dfb3763cc94207b9a0"
-  integrity sha512-DHMSgctz7uD6mqYNWaYq11yYspPqSRFW2J9T/UUZ2PZ8+Vgo4QsWipSxHkIIkA3ds3ktmGxlEi6iz3mlWoHCbg==
+douhub-helper-util@1.0.91:
+  version "1.0.91"
+  resolved "https://registry.npmjs.org/douhub-helper-util/-/douhub-helper-util-1.0.91.tgz#d4cab4570058bd22a3632dac2e9bf7816611b24a"
+  integrity sha512-n4b0sKZrt3REFN6+wZO4kSeMs1YqsNHVIaB9QfrCuDqu3o0gTUFWGh0g6sBfc4wwE3PpaLbOdA97dLGp8Pbk9w==
   dependencies:
     axios "^0.24.0"
     csvtojson "^2.0.10"
@@ -2434,31 +2434,18 @@ douhub-helper-util@1.0.85:
     slugify "^1.6.4"
     uuid "^8.3.2"
 
-douhub-helper-util@1.0.89:
-  version "1.0.89"
-  resolved "https://registry.npmjs.org/douhub-helper-util/-/douhub-helper-util-1.0.89.tgz#b37c3cffbc7a59a746d243b118f702e24338ff58"
-  integrity sha512-E7vkkT3iT9d4rNLjFhyva0Quu+rHJWeh3CAYRrpvdH9FyCtlC6fSB/tVMco0dI0AA8QjsuR9wTo9NAVKMG/uHg==
+douhub-ui-store@1.0.58:
+  version "1.0.58"
+  resolved "https://registry.npmjs.org/douhub-ui-store/-/douhub-ui-store-1.0.58.tgz#ce9a8ac4925743d25d2f74b21613970d097df123"
+  integrity sha512-7qBYQi+hOrlJrnA5iGjs0GJABgitzBgoNG4UMhrLyWAifdE7rP98BCKq+oHTFH2ht4cy4tW+9vG2d412TrqxTg==
   dependencies:
-    axios "^0.24.0"
-    csvtojson "^2.0.10"
-    is-url "^1.2.4"
-    js-base64 "^3.7.2"
-    libphonenumber-js "^1.9.42"
-    lodash "^4.17.21"
-    slugify "^1.6.4"
-    uuid "^8.3.2"
-
-douhub-ui-store@1.0.53:
-  version "1.0.53"
-  resolved "https://registry.yarnpkg.com/douhub-ui-store/-/douhub-ui-store-1.0.53.tgz#ea93171fdc041848d2ad0cffc69c47a492647133"
-  integrity sha512-eaGRri11UnGlgPevmonPrETf/O53tcD4LpE+6EY0O2ZpYAowpZA8hVaNafBEb2rIPRCoV4zBszM8DZE7SLl9lw==
-  dependencies:
-    douhub-helper-util "1.0.85"
+    douhub-helper-util "1.0.91"
     lodash "^4.17.21"
     mobx "^6.3.5"
     mobx-react "^7.2.1"
     mobx-react-lite "^3.2.1"
     mobx-state-tree "^5.0.5"
+    next "12.1.6"
     react "^17.0.2"
     react-dom "^17.0.2"
 
