@@ -23,7 +23,8 @@ export const useCurrentContext = (solution: Record<string, any>, settings?: {
     recordId?: string,
     needRecord?: string
     recordIdByMembership?: string,
-    needRecordByMembership?: string
+    needRecordByMembership?: string,
+    apiUrl?: string
 }) => {
     const router = useRouter();
     const [context, setContext] = useState<Record<string, any> | null>(null);
@@ -54,7 +55,7 @@ export const useCurrentContext = (solution: Record<string, any>, settings?: {
             if (isNonEmptyString(settings.needRecord)) apiParams.needRecord = settings.needRecord;
             if (isNonEmptyString(settings.needRecordByMembership)) apiParams.needRecordByMembership = settings.needRecordByMembership;
 
-            callAPI(solution, `${solution.apis.context}current`, apiParams, 'GET')
+            callAPI(solution, settings.apiUrl ? settings.apiUrl : `${solution.apis.context}current`, apiParams, 'GET')
                 .then((result: Record<string, any>) => {
                     const settingContext: any = isObject(settings?.context) ? cloneDeep(settings?.context) : {};
                     const currentContext = result.context;
@@ -76,7 +77,7 @@ export const useCurrentContext = (solution: Record<string, any>, settings?: {
                     if (isObject(settingContext.user)) {
                         currentContext.user = {
                             ... (isObject(currentContext.user) ? cloneDeep(currentContext.user) : {}),
-                            ... settingContext.user
+                            ...settingContext.user
                         }
                     }
 
