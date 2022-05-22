@@ -19,7 +19,7 @@
   "dependencies": {
     "@aws-amplify/auth": "^4.3.19",
     "@headlessui/react": "^1.4.3",
-    "antd": "^4.18.4",
+    "antd": "4.20.5",
     "douhub-helper-util": "1.0.91",
     "douhub-ui-store": "1.0.58",
     "lodash": "^4.17.21",
