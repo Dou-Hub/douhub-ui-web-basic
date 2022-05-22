@@ -24,6 +24,7 @@ import Tags from './controls/tags';
 import BasicModal from './controls/basic-modal';
 import Tooltip from './controls/tooltip';
 import Recaptcha, { getRecaptchaToken } from './controls/recaptcha';
+import Splitter from './controls/splitter';
 
 export { ARTICLE_CSS } from './article-css';
 
@@ -43,6 +44,6 @@ export {
 
 export {
     AppBase, View, Text, CSS, Div, Nothing, SVG, Avatar, Triangle, Img, 
-    Recaptcha, getRecaptchaToken, Tags, Card, BasicModal, Tooltip
+    Recaptcha, getRecaptchaToken, Tags, Card, BasicModal, Tooltip, Splitter
 }
 

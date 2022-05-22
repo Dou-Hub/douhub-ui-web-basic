@@ -15,7 +15,7 @@ const CSS = (props: Record<string, any>) => {
             console.log({cssStore: {id, content}})
             cssStore.setCSS(id, content);
         }   
-    }, []);
+    }, [id]);
 
     return <></>
 }
