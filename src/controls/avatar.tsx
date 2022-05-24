@@ -4,7 +4,6 @@ import SVG from './svg';
 import { isNonEmptyString, COLORS, stringToColor, getRecordDisplay, isObject } from 'douhub-helper-util'
 import { Menu, Transition } from '@headlessui/react'
 import { map } from 'lodash';
-import { _track } from '../index';
 
 const styles = {
     countWrapper: { position: 'absolute', top: -5, right: -5, borderRadius: 9, backgroundColor: COLORS.red, justifyContent: 'space-around' },
